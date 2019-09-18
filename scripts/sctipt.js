@@ -25,15 +25,13 @@ window.addEventListener('DOMContentLoaded', function () {
             timerHours.textContent = timer.hours;
             timerMinutes.textContent = timer.minutes;
             timerSeconds.textContent = timer.seconds;
-            setInterval( () =>{
-                updateClock();
-            }, 1000)
+            if (timer.timeRemaining <= 0) {
+                clearInterval(myInterval);
+            }
         }
-        updateClock();
-
-        //updateClock();
+        let myInterval = setInterval(updateClock, 1000);
     }
-    countTimer('18 september 2019');
+    countTimer('20 september 2019');
 //Меню
     const toggleMenu = () => {
         const btnMenu = document.querySelector('.menu'),
@@ -62,15 +60,17 @@ window.addEventListener('DOMContentLoaded', function () {
 
     const togglePopUp = () => {
 
-
-        let opacity1 = (i) => {
+        let i = 0,
+        timeout;
+        let opacity1 = () => {
             console.log(i);
-            if (i < 0.5) {
-                popup.style.opacity = `${i}`;
-                i += 0.1;
-                console.log(opacity1(i));
-                //setTimeout(function () {console.log('ok')}, 3000);
-                opacity1(i);
+            popup.style.opacity = `${i}`;
+            i += 0.1;
+            if (i < 1) {
+                timeout = setTimeout(opacity1, 30)
+            } else {
+                clearTimeout(timeout);
+                i = 0;
             }
         };
         const popup = document.querySelector('.popup'),
@@ -82,7 +82,7 @@ window.addEventListener('DOMContentLoaded', function () {
             elem.addEventListener('click', () => {
                 popup.style.opacity = '0';
                 popup.style.display = 'block';
-                opacity1(0);
+                opacity1();
             });
         });
         popupClose.forEach((elem) => {
