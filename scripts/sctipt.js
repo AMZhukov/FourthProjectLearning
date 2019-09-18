@@ -25,14 +25,12 @@ window.addEventListener('DOMContentLoaded', function () {
             timerHours.textContent = timer.hours;
             timerMinutes.textContent = timer.minutes;
             timerSeconds.textContent = timer.seconds;
-            setInterval( () =>{
-                updateClock();
-            }, 1000)
+            if (timer.timeRemaining <= 0) {
+                clearInterval(myInterval);
+            }
         }
-        updateClock();
-
-        //updateClock();
+        let myInterval = setInterval(updateClock, 1000);
     }
-    countTimer('18 september 2019');
+    countTimer('19 september 2019');
 
 });
