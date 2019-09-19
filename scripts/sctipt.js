@@ -34,11 +34,11 @@ window.addEventListener('DOMContentLoaded', function () {
     countTimer('20 september 2019');
 //Меню
     const toggleMenu = () => {
-        const btnMenu = document.querySelector('.menu'),
-            menu = document.querySelector('menu');
+        const body = document.querySelector('body');
+            //menu = document.querySelector('menu');
             //menuItems = menu.querySelectorAll('ul>li');
-        const handlerMenu = () => {
-            menu.classList.toggle('active-menu');
+        const handlerMenu = (menu) => {
+            body.querySelector('menu').classList.toggle('active-menu');
 
             /*if(!menu.style.transform || menu.style.transform === `translate(-100%)`) {
                 menu.style.transform = `translate(0)`;
@@ -47,26 +47,34 @@ window.addEventListener('DOMContentLoaded', function () {
                 menu.style.transform = `translate(-100%)`;
             }*/
         };
-        btnMenu.addEventListener('click', handlerMenu);
+        //btnMenu.addEventListener('click', handlerMenu);
 
         //menuItems.forEach((elem) => elem.addEventListener('click', handlerMenu));
 
-        menu.addEventListener('click', (event) => {
+        body.addEventListener('click', (event) => {
             let target = event.target;
-            if (target.classList.contains('close-btn')) {
-                console.log('all right');
+
+            console.log('all right');
+            //let targetMenu = target.closest('.menu');
+            if (target.closest('.menu')) {
+                console.log('меню приехадо');
+
+                handlerMenu(target);
+            }
+            else if (target.closest('.close-btn')) {
+                console.log('крестик нажат');
                 handlerMenu();//menu.style.display = 'none';
-            } else {
-                target = target.closest('.active-menu');
+            } else if (!target.closest('.menu')) {
+                /*target = target.closest('.active-menu');
                 if(target) {
                     console.log('all right123');
-                }
-                if (!target) {
-                    console.log('all right');
+                }*/
+                 /*(target.)*/
+
+                    console.log('мимо меню');
                     handlerMenu();//menu.style.display = 'none';
-                }
             }
-        })
+        });
     };
 
     toggleMenu();
