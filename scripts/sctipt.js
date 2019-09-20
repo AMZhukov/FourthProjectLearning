@@ -64,15 +64,11 @@ window.addEventListener('DOMContentLoaded', function () {
             else if (target.closest('.close-btn')) {
                 console.log('крестик нажат');
                 handlerMenu();//menu.style.display = 'none';
+            } else if (target.tagName === 'A' && target.closest('.active-menu')) {
+                console.log('клик по таг А меню');
+                handlerMenu();//menu.style.display = 'none';
             } else if (!target.closest('.menu')) {
-                /*target = target.closest('.active-menu');
-                if(target) {
-                    console.log('all right123');
-                }*/
-                 /*(target.)*/
-
-                    console.log('мимо меню');
-                    handlerMenu();//menu.style.display = 'none';
+                menu.classList.remove('active-menu');
             }
         });
     };
