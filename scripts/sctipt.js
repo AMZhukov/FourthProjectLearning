@@ -34,11 +34,12 @@ window.addEventListener('DOMContentLoaded', function () {
     countTimer('20 september 2019');
 //Меню
     const toggleMenu = () => {
-        const body = document.querySelector('body');
-            //menu = document.querySelector('menu');
+        const body = document.querySelector('body'),
+            menu = body.querySelector('menu');
             //menuItems = menu.querySelectorAll('ul>li');
-        const handlerMenu = (menu) => {
-            body.querySelector('menu').classList.toggle('active-menu');
+        const handlerMenu = () => {
+            //body.querySelector('menu').classList.toggle('active-menu');
+            menu.classList.toggle('active-menu');
 
             /*if(!menu.style.transform || menu.style.transform === `translate(-100%)`) {
                 menu.style.transform = `translate(0)`;
@@ -54,20 +55,15 @@ window.addEventListener('DOMContentLoaded', function () {
         body.addEventListener('click', (event) => {
             let target = event.target;
 
-            console.log('all right');
             //let targetMenu = target.closest('.menu');
             if (target.closest('.menu')) {
-                console.log('меню приехадо');
-
-                handlerMenu(target);
+                handlerMenu();
             }
             else if (target.closest('.close-btn')) {
-                console.log('крестик нажат');
                 handlerMenu();//menu.style.display = 'none';
             } else if (target.tagName === 'A' && target.closest('.active-menu')) {
-                console.log('клик по таг А меню');
                 handlerMenu();//menu.style.display = 'none';
-            } else if (!target.closest('.menu')) {
+            } else if (!target.closest('.active-menu')) {
                 menu.classList.remove('active-menu');
             }
         });
@@ -148,5 +144,8 @@ window.addEventListener('DOMContentLoaded', function () {
         });
     };
     tabs();
+
+    //slider
+
 
 });
