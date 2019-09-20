@@ -31,6 +31,122 @@ window.addEventListener('DOMContentLoaded', function () {
         }
         let myInterval = setInterval(updateClock, 1000);
     }
-    countTimer('19 september 2019');
+    countTimer('20 september 2019');
+//Меню
+    const toggleMenu = () => {
+        const body = document.querySelector('body');
+            //menu = document.querySelector('menu');
+            //menuItems = menu.querySelectorAll('ul>li');
+        const handlerMenu = (menu) => {
+            body.querySelector('menu').classList.toggle('active-menu');
+
+            /*if(!menu.style.transform || menu.style.transform === `translate(-100%)`) {
+                menu.style.transform = `translate(0)`;
+            }
+            else {
+                menu.style.transform = `translate(-100%)`;
+            }*/
+        };
+        //btnMenu.addEventListener('click', handlerMenu);
+
+        //menuItems.forEach((elem) => elem.addEventListener('click', handlerMenu));
+
+        body.addEventListener('click', (event) => {
+            let target = event.target;
+
+            console.log('all right');
+            //let targetMenu = target.closest('.menu');
+            if (target.closest('.menu')) {
+                console.log('меню приехадо');
+
+                handlerMenu(target);
+            }
+            else if (target.closest('.close-btn')) {
+                console.log('крестик нажат');
+                handlerMenu();//menu.style.display = 'none';
+            } else if (target.tagName === 'A' && target.closest('.active-menu')) {
+                console.log('клик по таг А меню');
+                handlerMenu();//menu.style.display = 'none';
+            } else if (!target.closest('.menu')) {
+                menu.classList.remove('active-menu');
+            }
+        });
+    };
+
+    toggleMenu();
+
+    const togglePopUp = () => {
+
+        let i = 0,
+        timeout;
+        let opacity1 = () => {
+            console.log(i);
+            popup.style.opacity = `${i}`;
+            i += 0.1;
+            if (i < 1) {
+                timeout = setTimeout(opacity1, 30)
+            } else {
+                clearTimeout(timeout);
+                i = 0;
+            }
+        };// animation
+        const popup = document.querySelector('.popup'),
+
+        popupBtn = document.querySelectorAll('.popup-btn');
+
+        popupBtn.forEach((elem) => {
+            elem.addEventListener('click', () => {
+                popup.style.opacity = '0';
+                popup.style.display = 'block';
+                opacity1();
+            });
+        });
+
+        popup.addEventListener('click', (event) => {
+            let target = event.target;
+            if(target.classList.contains('popup-close')){
+                popup.style.display = 'none';
+            } else {
+                target = target.closest('.popup-content');
+                if (!target) {
+                    popup.style.display = 'none';
+                }
+            }
+        });
+    };
+    togglePopUp();
+
+    //табы
+
+    const tabs = () => {
+        const tabHeader = document.querySelector('.service-header'),
+            tab = tabHeader.querySelectorAll('.service-header-tab'),
+            tabContent = document.querySelectorAll('.service-tab');
+
+        const toggleTabContent = (index) => {
+            for(let i = 0; i < tabContent.length; i++){
+                if (index === i) {
+                    tab[i].classList.add('active');
+                    tabContent[i].classList.remove(('d-none'));
+                }
+                else {
+                    tab[i].classList.remove('active');
+                    tabContent[i].classList.add(('d-none'));
+                }
+            }
+        };
+        tabHeader.addEventListener('click', (event) => {
+            let target = event.target;
+            target = target.closest('.service-header-tab');
+            if (target){
+                tab.forEach((item, i) => {
+                    if(item === target){
+                        toggleTabContent(i);
+                    }
+                });
+            }
+        });
+    };
+    tabs();
 
 });
