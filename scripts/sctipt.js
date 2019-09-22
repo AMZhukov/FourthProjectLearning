@@ -255,46 +255,43 @@ window.addEventListener('DOMContentLoaded', function () {
 
 // change photo crew
     const changePhoto = () => {
-        const divWithPhoto = document.querySelector('.row');
         const collectPhoto = document.querySelectorAll('.command__photo');
+        let srcPhoto = null;
+        collectPhoto.forEach((card) => {
 
-        //Прошу помочь, не могу заставить работать
-        const swapSrsDataSet = (src, dataSet) => {
-            console.log(src);
-            let temp = src;
-            src = dataSet;
-            dataSet = temp;
-            return;
-        };
-        collectPhoto[0].addEventListener('mouseenter', (e) => {
-            swapSrsDataSet(e.target.src, e.target.dataset.img);
-        });
-        collectPhoto[1].addEventListener('mouseenter', (e) => {
-            e.target.src = e.target.dataset.img;
-        });
-        collectPhoto[2].addEventListener('mouseenter', (e) => {
-            e.target.src = e.target.dataset.img;
-        });
-        collectPhoto[3].addEventListener('mouseenter', (e) => {
-            e.target.src = e.target.dataset.img;
-        });
-        collectPhoto[4].addEventListener('mouseenter', (e) => {
-            e.target.src = e.target.dataset.img;
-        });
-        collectPhoto[5].addEventListener('mouseenter', (e) => {
-            e.target.src = e.target.dataset.img;
-        });
+            card.addEventListener('mouseover', () => {
+                srcPhoto = card.src;
+                card.setAttribute('src', card.dataset.img);
+            });
 
-        //
-        // for (let key in collectPhoto) {
-        //     collectPhoto[key].addEventListener('mouseenter', (e) => {
-        //         e.target.src = e.target.dataset.img;
-        //     });
-        // }
+            card.addEventListener('mouseleave', () => {
+                card.setAttribute('src', srcPhoto);
+            });
+        });
     };
     changePhoto();
 
-    //permission only digital for calculator
-    //document.querySelector('.')
+    //resolution only digits for calculator
+
+    const onlyDigits = () => {
+        const collectCalc = document.querySelectorAll('.calc-item');
+
+        collectCalc[1].addEventListener('input', () => {
+            collectCalc[1].value = collectCalc[1].value.replace(/\d/g, '');
+        });
+
+        // for(let i = 1; i < collectCalc.length; i++){
+        //     collectCalc[i].addEventListener('input', () => {
+        //         collectCalc[i].value = collectCalc[i].value.replace(/\d/g, '');
+        //     });
+        // }
+        // collectCalc.forEach((calc) => {
+        //     calc.addEventListener('input', () => {
+        //         calc.value = calc.value.replace(/\d/g, '');
+        //     });
+        // });
+
+    };
+    onlyDigits();
 
 });
