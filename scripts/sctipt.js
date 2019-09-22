@@ -276,20 +276,13 @@ window.addEventListener('DOMContentLoaded', function () {
     const onlyDigits = () => {
         const collectCalc = document.querySelectorAll('.calc-item');
 
-        collectCalc[1].addEventListener('input', () => {
-            collectCalc[1].value = collectCalc[1].value.replace(/\d/g, '');
+        collectCalc.forEach((calc, index) => {
+            if (index > 0) {
+                calc.addEventListener('input', () => {
+                    calc.value = calc.value.replace(/\D/g, '');
+                });
+            }
         });
-
-        // for(let i = 1; i < collectCalc.length; i++){
-        //     collectCalc[i].addEventListener('input', () => {
-        //         collectCalc[i].value = collectCalc[i].value.replace(/\d/g, '');
-        //     });
-        // }
-        // collectCalc.forEach((calc) => {
-        //     calc.addEventListener('input', () => {
-        //         calc.value = calc.value.replace(/\d/g, '');
-        //     });
-        // });
 
     };
     onlyDigits();
