@@ -406,10 +406,10 @@
                         <input type="tel" class="form-phone" id="form3-phone" name="user_phone"
                             placeholder="Ваш номер телефона" required>
                     </div>
-                    <div>
+
                         <input type="email" class="form-email" id="form3-email" name="user_email"
                             placeholder="Ваш E-mail">
-                    </div>
+
                     <button class="btn form-btn" type="submit">Оставить заявку!</button>
                 </form>
             </div>
@@ -418,4 +418,25 @@
 
 <script src="./scripts/sctipt.js"></script>
 </body>
+<script src="./plugins/validator/validator.js"></script>
+<script>
+    const  valid = new Validator ({
+        selector: '#form3',
+        pattern: {
+            // phone: /^\+380\d{7}$/,
+           // zip: /\d{5,6}/
+        },
+        method: {
+            'phone': [
+                ['notEmpty'],
+                ['pattern', 'phone']
+            ],
+            'form3-email': [
+                ['notEmpty'],
+                ['pattern', 'email']
+            ],
+        }
+    });
+    valid.init();
+</script>
 </html>
