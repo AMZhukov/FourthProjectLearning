@@ -1,10 +1,11 @@
 window.addEventListener('DOMContentLoaded', function () {
     'use strict';
     // timer
-    function countTimer(deadline){
+    function countTimer(deadline) {
         let timerHours = document.querySelector('#timer-hours'),
-            timerMinutes  = document.querySelector('#timer-minutes'),
+            timerMinutes = document.querySelector('#timer-minutes'),
             timerSeconds = document.querySelector('#timer-seconds');
+
         function getTimeRemaining() {
             let dateStop = new Date(deadline).getTime(),
                 dateNow = new Date().getTime(),
@@ -12,9 +13,15 @@ window.addEventListener('DOMContentLoaded', function () {
                 seconds = checkNumber(Math.floor(timeRemaining % 60)),
                 minutes = checkNumber(Math.floor((timeRemaining / 60) % 60)),
                 hours = checkNumber(Math.floor(timeRemaining / 60 / 60));
-            return {timeRemaining, hours, minutes, seconds};
+            return {
+                timeRemaining,
+                hours,
+                minutes,
+                seconds
+            };
             //days = Math.floor(timeRemaining / 60 / 60 / 24);
         }
+
         function checkNumber(temp) {
             return (temp > 9 ? temp : `0${temp}`);
         }
@@ -31,7 +38,8 @@ window.addEventListener('DOMContentLoaded', function () {
         }
         let myInterval = setInterval(updateClock, 1000);
     }
-    countTimer('20 september 2019');
+    let deadLine = '29 september 2019'
+    countTimer(deadLine);
 
     //Create dots for sliders
 
@@ -54,11 +62,11 @@ window.addEventListener('DOMContentLoaded', function () {
     createDots();
 
 
-//Меню
+    //Меню
     const toggleMenu = () => {
         const body = document.querySelector('body'),
             menu = body.querySelector('menu');
-            //menuItems = menu.querySelectorAll('ul>li');
+        //menuItems = menu.querySelectorAll('ul>li');
         const handlerMenu = () => {
             //body.querySelector('menu').classList.toggle('active-menu');
             menu.classList.toggle('active-menu');
@@ -80,11 +88,10 @@ window.addEventListener('DOMContentLoaded', function () {
             //let targetMenu = target.closest('.menu');
             if (target.closest('.menu')) {
                 handlerMenu();
-            }
-            else if (target.closest('.close-btn')) {
-                handlerMenu();//menu.style.display = 'none';
+            } else if (target.closest('.close-btn')) {
+                handlerMenu(); //menu.style.display = 'none';
             } else if (target.tagName === 'A' && target.closest('.active-menu')) {
-                handlerMenu();//menu.style.display = 'none';
+                handlerMenu(); //menu.style.display = 'none';
             } else if (!target.closest('.active-menu')) {
                 menu.classList.remove('active-menu');
             }
@@ -96,7 +103,7 @@ window.addEventListener('DOMContentLoaded', function () {
     const togglePopUp = () => {
 
         let i = 0,
-        timeout;
+            timeout;
         let opacity1 = () => {
             console.log(i);
             popup.style.opacity = `${i}`;
@@ -111,7 +118,7 @@ window.addEventListener('DOMContentLoaded', function () {
         // animation
         const popup = document.querySelector('.popup'),
 
-        popupBtn = document.querySelectorAll('.popup-btn');
+            popupBtn = document.querySelectorAll('.popup-btn');
 
         popupBtn.forEach((elem) => {
             elem.addEventListener('click', () => {
@@ -123,7 +130,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
         popup.addEventListener('click', (event) => {
             let target = event.target;
-            if(target.classList.contains('popup-close')){
+            if (target.classList.contains('popup-close')) {
                 popup.style.display = 'none';
             } else {
                 target = target.closest('.popup-content');
@@ -143,12 +150,11 @@ window.addEventListener('DOMContentLoaded', function () {
             tabContent = document.querySelectorAll('.service-tab');
 
         const toggleTabContent = (index) => {
-            for(let i = 0; i < tabContent.length; i++){
+            for (let i = 0; i < tabContent.length; i++) {
                 if (index === i) {
                     tab[i].classList.add('active');
                     tabContent[i].classList.remove(('d-none'));
-                }
-                else {
+                } else {
                     tab[i].classList.remove('active');
                     tabContent[i].classList.add(('d-none'));
                 }
@@ -157,9 +163,9 @@ window.addEventListener('DOMContentLoaded', function () {
         tabHeader.addEventListener('click', (event) => {
             let target = event.target;
             target = target.closest('.service-header-tab');
-            if (target){
+            if (target) {
                 tab.forEach((item, i) => {
-                    if(item === target){
+                    if (item === target) {
                         toggleTabContent(i);
                     }
                 });
@@ -189,7 +195,7 @@ window.addEventListener('DOMContentLoaded', function () {
             prevSlide(slide, currentSlide, 'portfolio-item-active');
             prevSlide(dot, currentSlide, 'dot-active');
             currentSlide++;
-            if(currentSlide >= slide.length){
+            if (currentSlide >= slide.length) {
                 currentSlide = 0;
             }
             nextSlide(slide, currentSlide, 'portfolio-item-active');
@@ -209,28 +215,28 @@ window.addEventListener('DOMContentLoaded', function () {
             event.preventDefault();
             let target = event.target;
 
-            if (!target.matches('.portfolio-btn, .dot')){
+            if (!target.matches('.portfolio-btn, .dot')) {
                 return;
             }
 
             prevSlide(slide, currentSlide, 'portfolio-item-active');
             prevSlide(dot, currentSlide, 'dot-active');
 
-            if(target.matches('#arrow-right')) {
+            if (target.matches('#arrow-right')) {
                 currentSlide++;
-            }else if(target.matches('#arrow-left')){
+            } else if (target.matches('#arrow-left')) {
                 currentSlide--;
-            } else if (target.matches('.dot')){
+            } else if (target.matches('.dot')) {
                 dot.forEach((elem, index) => {
                     if (elem === target) {
                         currentSlide = index;
                     }
                 });
             }
-            if (currentSlide >= slide.length){
+            if (currentSlide >= slide.length) {
                 currentSlide = 0;
             }
-            if (currentSlide < 0){
+            if (currentSlide < 0) {
                 currentSlide = slide.length - 1;
             }
             nextSlide(slide, currentSlide, 'portfolio-item-active');
@@ -253,7 +259,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     slider();
 
-// change photo crew
+    // change photo crew
     const changePhoto = () => {
         const collectPhoto = document.querySelectorAll('.command__photo');
         let srcPhoto = null;
@@ -302,13 +308,13 @@ window.addEventListener('DOMContentLoaded', function () {
                 countValue = 1,
                 dayValue = 1;
             const typeValue = calcType.options[calcType.selectedIndex].value,
-            squareValue = +calcSquare.value;
+                squareValue = +calcSquare.value;
 
-            if (calcCOunt.value > 1){
-                countValue += (calcCOunt.value - 1)  / 10;
+            if (calcCOunt.value > 1) {
+                countValue += (calcCOunt.value - 1) / 10;
             }
 
-            if (calcDay.value && calcDay.value < 5){
+            if (calcDay.value && calcDay.value < 5) {
                 dayValue *= 2;
             } else if (calcDay.value && calcDay.value < 10) {
                 dayValue *= 1.5;
@@ -341,5 +347,103 @@ window.addEventListener('DOMContentLoaded', function () {
     };
 
     calc(100);
+
+    // отправка данных на сервер
+    const sendForm = (id) => {
+
+        const errorMessege = 'Что то пошло не так',
+            loadMessage = 'Загрузка...',
+            successMessage = 'Спасибо! Мы скоро с вами свяжемся!';
+        const form = document.getElementById(id);
+        const button = form.querySelector("button");
+        console.log('атрибуты кнопки', button);
+        const blockedButton = () => {
+            console.log('Зашли в функцию');
+            if (!form.querySelector('.error')) {
+                console.log(form.querySelector('.error'))
+                if (button.getAttribute('disabled')) button.removeAttribute('disabled');
+            } else button.setAttribute('disabled', 'true');
+
+        }
+
+        form.addEventListener('change', (event) => {
+            let target = event.target;
+            if (target.matches('input')) {
+                blockedButton();
+            }
+        });
+
+
+        const statusMessage = document.createElement('div');
+
+        if (id === 'form3') statusMessage.style.cssText = 'font-size: 2rem; color: white;';
+        else statusMessage.style.cssText = 'font-size: 2rem;';
+
+
+
+
+
+
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            form.appendChild(statusMessage);
+            statusMessage.textContent = loadMessage;
+            const formData = new FormData(form);
+            let body = {};
+            // for (let val of formData.entries()){ // Можно и так
+            //     body[val[0]] = val[1];
+            // }
+            formData.forEach((val, key) => { // Можно и вот так
+                body[key] = val;
+            });
+            postData(body,
+                () => {
+                statusMessage.textContent = successMessage;
+                form.reset();
+                },
+                (error) => {
+                statusMessage.textContent = errorMessage;
+                console.error(error);
+                },
+                );
+        });
+
+        const postData = (body, outputData, errorData) => {
+            const request = new XMLHttpRequest();
+            request.addEventListener('readystatechange', () => {
+                if (request.readyState !== 4) {
+                    return;
+                }
+                if (request.status === 200) {
+                    outputData();
+                } else {
+                    errorData(request.status);
+                }
+            });
+            request.open('POST', './server.php');
+            request.setRequestHeader('Content-Type', 'application/json');
+
+            request.send(JSON.stringify(body));
+        }
+    };
+    sendForm('form1');
+    sendForm('form2');
+    sendForm('form3');
+
+
+    //
+    // start() {
+    //     if (salaryAmount.value === '') {
+    //         start.setAttribute('disabled', 'true');
+    //         return;
+    //     }
+    //
+    //
+    // // разрешение ввода номера телефона, начинающегося с +7 ХХХ ХХХ ХХ ХХ
+    // function validPhone() {
+    //
+    // }
+
 
 });
