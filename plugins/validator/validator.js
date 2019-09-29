@@ -10,7 +10,6 @@ class Validator{
         this.error = new Set();
     }
     init(){
-        console.log(this.form);
         this.applyStyle();
         this.setPattern();
         this.elementsForm.forEach(elem => elem.addEventListener('change', this.checkIt.bind(this)));
@@ -55,7 +54,6 @@ class Validator{
             this.showError(target);
             this.error.add(target);
         }
-        console.log(this.error);
     }
     showError(elem){
         elem.classList.remove('success');

@@ -355,7 +355,7 @@ window.addEventListener('DOMContentLoaded', function () {
             successMessage = 'Спасибо! Мы скоро с вами свяжемся!';
         const form = document.getElementById(id);
         const button = form.querySelector("button");
-        console.log('атрибуты кнопки', button);
+
         const blockedButton = () => {
             console.log('Зашли в функцию');
             if (!form.querySelector('.error')) {
