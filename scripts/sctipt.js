@@ -393,8 +393,8 @@ window.addEventListener('DOMContentLoaded', function () {
                 body[key] = val;
             });
             postData(body)
-                .then(statusMessage.textContent = successMessage; form.reset();)
-                .catch(error => (statusMessage.textContent = errorMessage; console.error(error););
+                .then(() => {statusMessage.textContent = successMessage; form.reset();})
+                .catch(error => {statusMessage.textContent = errorMessage; console.error(error);});
         });
 
         const postData = (body, errorData) => {
