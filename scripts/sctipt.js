@@ -38,8 +38,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }
         let myInterval = setInterval(updateClock, 1000);
     }
-    let deadLine = '29 september 2019'
-    countTimer(deadLine);
+    countTimer('30 september 2019');
 
     //Create dots for sliders
 
@@ -360,11 +359,11 @@ window.addEventListener('DOMContentLoaded', function () {
         const blockedButton = () => {
             console.log('Зашли в функцию');
             if (!form.querySelector('.error')) {
-                console.log(form.querySelector('.error'))
+                console.log(form.querySelector('.error'));
                 if (button.getAttribute('disabled')) button.removeAttribute('disabled');
             } else button.setAttribute('disabled', 'true');
 
-        }
+        };
 
         form.addEventListener('change', (event) => {
             let target = event.target;
@@ -381,10 +380,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
 
-
-
-
-
         form.addEventListener('submit', (event) => {
             event.preventDefault();
             form.appendChild(statusMessage);
@@ -397,34 +392,29 @@ window.addEventListener('DOMContentLoaded', function () {
             formData.forEach((val, key) => { // Можно и вот так
                 body[key] = val;
             });
-            postData(body,
-                () => {
-                statusMessage.textContent = successMessage;
-                form.reset();
-                },
-                (error) => {
-                statusMessage.textContent = errorMessage;
-                console.error(error);
-                },
-                );
+            postData(body)
+                .then(statusMessage.textContent = successMessage; form.reset();)
+                .catch(error => (statusMessage.textContent = errorMessage; console.error(error););
         });
 
-        const postData = (body, outputData, errorData) => {
-            const request = new XMLHttpRequest();
-            request.addEventListener('readystatechange', () => {
-                if (request.readyState !== 4) {
-                    return;
-                }
-                if (request.status === 200) {
-                    outputData();
-                } else {
-                    errorData(request.status);
-                }
-            });
-            request.open('POST', './server.php');
-            request.setRequestHeader('Content-Type', 'application/json');
+        const postData = (body, errorData) => {
+            return Promise ((resolve, reject) => {
+                const request = new XMLHttpRequest();
+                request.addEventListener('readystatechange', () => {
+                    if (request.readyState !== 4) {
+                        return;
+                    }
+                    if (request.status === 200) {
+                        resolve(body);
+                    } else {
+                        reject(request.status);
+                    }
+                });
+                request.open('POST', './server.php');
+                request.setRequestHeader('Content-Type', 'application/json');
 
-            request.send(JSON.stringify(body));
+                request.send(JSON.stringify(body));
+            })
         }
     };
     sendForm('form1');
