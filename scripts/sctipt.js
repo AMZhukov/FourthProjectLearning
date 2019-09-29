@@ -350,16 +350,16 @@ window.addEventListener('DOMContentLoaded', function () {
     // отправка данных на сервер
     const sendForm = (id) => {
 
-        const errorMessege = 'Что то пошло не так',
+        const errorMessage = 'Что то пошло не так',
             loadMessage = 'Загрузка...',
             successMessage = 'Спасибо! Мы скоро с вами свяжемся!';
         const form = document.getElementById(id);
         const button = form.querySelector("button");
 
         const blockedButton = () => {
-            console.log('Зашли в функцию');
+
             if (!form.querySelector('.error')) {
-                console.log(form.querySelector('.error'));
+
                 if (button.getAttribute('disabled')) button.removeAttribute('disabled');
             } else button.setAttribute('disabled', 'true');
 
