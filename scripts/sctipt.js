@@ -397,15 +397,15 @@ window.addEventListener('DOMContentLoaded', function () {
                 .catch(error => {statusMessage.textContent = errorMessage; console.error(error);});
         });
 
-        const postData = (body, errorData) => {
-            return Promise ((resolve, reject) => {
+        const postData = (body) => {
+            return new Promise ((resolve, reject) => {
                 const request = new XMLHttpRequest();
                 request.addEventListener('readystatechange', () => {
                     if (request.readyState !== 4) {
                         return;
                     }
                     if (request.status === 200) {
-                        resolve(body);
+                        resolve();
                     } else {
                         reject(request.status);
                     }
@@ -414,8 +414,8 @@ window.addEventListener('DOMContentLoaded', function () {
                 request.setRequestHeader('Content-Type', 'application/json');
 
                 request.send(JSON.stringify(body));
-            })
-        }
+            });
+        };
     };
     sendForm('form1');
     sendForm('form2');
