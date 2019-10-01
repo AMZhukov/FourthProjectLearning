@@ -1,4 +1,4 @@
-const path = require('path'); 4.4k (gzipped: 1,8K)
+const path = require('path');
 
 module.exports = {
     entry:  {

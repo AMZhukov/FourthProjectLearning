@@ -1,11 +1,11 @@
 {
-  "name": "projectforlearn",
+  "name": "ht",
   "version": "1.0.1",
   "description": "This project was created for training",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --open --mode=development",
-    "build": "webpack --mode-produciton"
+    "build": "webpack --mode=production"
   },
   "repository": {
     "type": "git",

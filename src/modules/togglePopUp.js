@@ -38,4 +38,4 @@ const togglePopUp = () => {
         }
     });
 };
-togglePopUp;
+export default togglePopUp;

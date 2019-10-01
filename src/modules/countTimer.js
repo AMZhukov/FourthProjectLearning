@@ -1,4 +1,4 @@
-function countTimer(deadline) {
+const countTimer = (deadline) => {
     let timerHours = document.querySelector('#timer-hours'),
         timerMinutes = document.querySelector('#timer-minutes'),
         timerSeconds = document.querySelector('#timer-seconds');
@@ -35,5 +35,5 @@ function countTimer(deadline) {
     }
     let myInterval = setInterval(updateClock, 1000);
 };
-export default countTimer;
 
+export default countTimer;
