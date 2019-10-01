@@ -16,6 +16,7 @@ const tabs = () => {
             }
         }
     };
+    toggleTabContent(0);
     tabHeader.addEventListener('click', (event) => {
         let target = event.target;
         target = target.closest('.service-header-tab');
@@ -27,5 +28,7 @@ const tabs = () => {
             });
         }
     });
+
+
 };
 export default tabs;
