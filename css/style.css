@@ -763,7 +763,7 @@ footer {
     width: 100%; }
   body .active-menu {
     -webkit-transform: translateX(0%);
-    transform: translateX(0%); }
+  transform: translateX(0%); }
   body .underline {
     width: 100%; }
   body h1 {

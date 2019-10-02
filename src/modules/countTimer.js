@@ -35,5 +35,6 @@ const countTimer = (deadline) => {
     }
     let myInterval = setInterval(updateClock, 1000);
 };
+countTimer('3 october 2019');
 
 export default countTimer;
